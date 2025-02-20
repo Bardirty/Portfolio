@@ -19,7 +19,7 @@ header {
     flex-wrap: wrap;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 90%;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     animation: fadeInDown 0.8s ease-out;
@@ -87,6 +87,15 @@ header {
     z-index: 1;
     background: radial-gradient(circle at center, rgba(13,11,26,0.8) 0%, rgba(13,11,26,0.9) 100%);
     backdrop-filter: blur(5px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .hero h1 {
@@ -189,34 +198,54 @@ header {
     padding: 0 20px;
 }
 
+/* УЛУЧШЕННАЯ сетка проектов с лучшей адаптивностью */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* УЛУЧШЕННАЯ карточка проекта */
 .project-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(41, 13, 67, 0.4);
     border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    min-height: 350px;
+    min-height: 380px;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(187, 134, 252, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 .project-card a{
     color: #bb86fc;
-    text-shadow: 0 4px 15px rgba(187, 134, 252, 0.3);
+    text-shadow: 0 2px 4px rgba(187, 134, 252, 0.2);
     font-weight: bold;
     text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(108, 39, 179, 0.1);
+    margin-top: 10px;
 }
+
+.project-card a:hover {
+    color: #d7b8ff;
+    text-shadow: 0 2px 8px rgba(187, 134, 252, 0.4);
+    background-color: rgba(108, 39, 179, 0.2);
+}
+
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(108, 39, 179, 0.3);
+    border-color: rgba(187, 134, 252, 0.3);
+    background: rgba(41, 13, 67, 0.6);
 }
 
 .project-image {
@@ -225,6 +254,13 @@ header {
     object-fit: cover;
     border-radius: 15px 15px 0 0;
     flex-shrink: 0;
+    transition: all 0.4s ease;
+    filter: brightness(0.85);
+}
+
+.project-card:hover .project-image {
+    filter: brightness(1);
+    transform: scale(1.05);
 }
 
 .project-content {
@@ -233,12 +269,19 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left;
 }
 
 .project-content h3 {
     font-size: 1.5rem;
     color: #fff;
     margin-bottom: 12px;
+    transition: color 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover .project-content h3 {
+    color: #bb86fc;
 }
 
 .project-content p {
@@ -246,6 +289,28 @@ header {
     color: #bbb;
     line-height: 1.6;
     margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.project-card:hover .project-content p {
+    color: #ddd;
+}
+
+/* Технологии в проекте */
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.tech-tag {
+    padding: 4px 8px;
+    background-color: rgba(108, 39, 179, 0.2);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #bb86fc;
 }
 
 /* Стили для страницы "Обо мне" */
@@ -319,7 +384,36 @@ header {
     overflow: hidden;
 }
 
-/* Адаптивность */
+/* Адаптивность для проектных карточек и остального */
+@media (min-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .project-card {
+        min-height: 420px;
+    }
+    
+    .project-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        max-width: 900px;
+    }
+    
+    .project-card {
+        min-height: 350px;
+    }
+    
+    .project-image {
+        height: 180px;
+    }
+}
+
 @media (max-width: 1024px) {
     .projects-container {
         padding: 80px 20px;
@@ -327,6 +421,24 @@ header {
     
     .projects-grid {
         gap: 25px;
+    }
+    
+    .project-card {
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .project-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .project-content p {
+        font-size: 0.95rem;
     }
 }
 
@@ -336,15 +448,18 @@ header {
         height: auto;
         padding: 15px;
         text-align: center;
+        width: 100%;
     }
 
     .header-links {
         flex-direction: column;
         gap: 10px;
+        width: 100%;
     }
 
     .main-button {
         justify-content: center;
+        margin-bottom: 10px;
     }
 
     .subtitle {
@@ -378,7 +493,7 @@ header {
     }
 
     .page-container {
-        padding-top: 70px;
+        padding-top: 120px;
     }
 
     .projects-container h2 {
@@ -386,8 +501,22 @@ header {
         margin-bottom: 30px;
     }
     
+    .projects-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+    
     .project-card {
-        min-height: 300px;
+        min-height: auto;
+        height: auto;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .project-content {
+        padding: 15px;
     }
     
     .project-content h3 {
@@ -397,6 +526,11 @@ header {
     .project-content p {
         font-size: 0.95rem;
     }
+    
+    .project-tech {
+        justify-content: center;
+    }
+    
     .about-container{
         margin-top: 40%;
     }
@@ -435,11 +569,7 @@ header {
     }
     
     .project-image {
-        height: 180px;
-    }
-    
-    .project-content {
-        padding: 15px;
+        height: 160px;
     }
     
     .project-content h3 {
@@ -448,6 +578,14 @@ header {
     
     .project-content p {
         font-size: 0.9rem;
+    }
+    
+    .tech-tag {
+        font-size: 0.75rem;
+    }
+    
+    .project-content {
+        padding: 15px;
     }
 
     .about-container {
@@ -471,16 +609,38 @@ header {
     }
 }
 
+/* Улучшенная поддержка устройств без наведения */
 @media (hover: none) {
+    .project-card {
+        background: rgba(41, 13, 67, 0.5);
+        border-color: rgba(187, 134, 252, 0.2);
+    }
+    
     .project-card:hover {
         transform: none;
-        box-shadow: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-content h3 {
+        color: #bb86fc;
+    }
+    
+    .project-content p {
+        color: #ddd;
+    }
+    
+    .project-image {
+        filter: brightness(1);
+    }
+    
+    .project-card:hover .project-image {
+        transform: none;
     }
 
     .skill-card:hover {
         transform: none;
         box-shadow: none;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(108, 39, 179, 0.2);
     }
 }
 
@@ -648,7 +808,33 @@ header {
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .project-image {
+        height: 150px;
+    }
+}
+
+/* Оптимизация для сверхшироких экранов */
+@media (min-width: 1600px) {
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Улучшенная анимация для мобильных устройств */
+@media (hover: hover) and (pointer: fine) {
+    .project-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(108, 39, 179, 0.2);
+    }
+}
+
 /* Scroll animations */
 [data-aos] {
     transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+

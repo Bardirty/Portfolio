@@ -18,7 +18,7 @@ function App() {
     }, []); // <--- Пустой массив зависимостей (вызывается один раз)
 
     return (
-        <Router basename="/Portfolio">
+        <Router>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />

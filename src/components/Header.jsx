@@ -3,7 +3,7 @@ function Header() {
     return (
         <header>
             <Link className="main-button" to="/">
-                <img src="button.png" alt="Logo" />
+                <img src={`${import.meta.env.BASE_URL}/button.png`} alt="Logo" />
                 <h3>Danil Bardakov</h3>
             </Link>
             <p className="subtitle">Junior Unity Developer</p>

@@ -94,7 +94,7 @@ function Projects() {
 function ProjectCard({ title, description, image }) {
     return (
         <div className="project-card" data-aos="fade-up">
-            <img src={image} alt={title} className="project-image" />
+            <img src={`${import.meta.env.BASE_URL}/${image}`} alt={title} className="project-image" />
             <div className="project-content">
                 <h3>{title}</h3>
                 <p>{description}</p>

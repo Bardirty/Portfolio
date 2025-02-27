@@ -28,12 +28,13 @@ header {
     height: 50px;
 }
 
-/* Навигация */
+/* Навигация для ПК */
 .header-links {
     display: flex;
     gap: 20px;
 }
 
+/* Ссылки */
 .header-link {
     text-decoration: none;
     color: white;
@@ -43,6 +44,7 @@ header {
     border-radius: 5px;
 }
 
+/* Эффект наведения */
 .header-link:hover {
     background-color: rgba(255, 255, 255, 0.2);
 }
@@ -51,20 +53,31 @@ header {
 .burger-menu {
     display: none;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* Бургер-меню при наведении */
+.burger-menu:hover {
+    transform: scale(1.1);
+    background: rgba(187, 134, 252, 0.1);
+}
+
+/* Линии бургера */
 .burger-line {
-    width: 30px;
+    width: 35px;
     height: 4px;
-    background-color: white;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #bb86fc, #6c27b3);
     transition: all 0.3s ease-in-out;
 }
 
-/* Анимация бургер-меню */
+/* Анимация бургер-меню при открытии */
 .burger-menu.open .burger-line:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg);
 }
 
 .burger-menu.open .burger-line:nth-child(2) {
@@ -72,21 +85,26 @@ header {
 }
 
 .burger-menu.open .burger-line:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Плавная анимация */
+.burger-menu.open {
+    transform: rotate(180deg);
+}
+
+/* Добавление тени при открытии */
+.burger-menu.open .burger-line {
+    box-shadow: 0 0 10px rgba(187, 134, 252, 0.7);
 }
 
 /* Контекстное меню (анимация выпадения) */
-.header-links {
-    display: flex;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-/* Стили для мобильного контекстного меню */
 @media (max-width: 768px) {
     .burger-menu {
         display: flex;
     }
 
+    /* По умолчанию скрываем мобильное меню */
     .header-links {
         display: flex;
         flex-direction: column;
@@ -96,21 +114,27 @@ header {
         background: rgba(41, 13, 67, 0.95);
         width: 100%;
         text-align: center;
-        padding: 0;
-        transform: translateY(-20px);
+        padding: 15px 0;
+        transform: translateY(-30px);
         opacity: 0;
         visibility: hidden;
         border-radius: 0 0 10px 10px;
-        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(10px);
+        transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), 
+                    opacity 0.4s ease-in-out, 
+                    box-shadow 0.4s ease-in-out;
     }
 
+    /* При открытии */
     .header-links.mobile-open {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
-    /* Анимация появления каждого элемента */
+    /* Анимация появления ссылок */
     .header-link {
         padding: 15px;
         opacity: 0;
@@ -118,8 +142,29 @@ header {
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
 
-    .mobile-open .header-link {
+    /* Плавное появление ссылок по очереди */
+    .mobile-open .header-link:nth-child(1) {
         opacity: 1;
         transform: translateY(0);
+        transition-delay: 0.1s;
+    }
+
+    .mobile-open .header-link:nth-child(2) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.2s;
+    }
+
+    .mobile-open .header-link:nth-child(3) {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.3s;
+    }
+}
+
+/* На больших экранах всегда показываем навигацию */
+@media (min-width: 769px) {
+    .header-links {
+        display: flex !important;
     }
 }

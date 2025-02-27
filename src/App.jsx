@@ -9,6 +9,15 @@ import Contacts from "./pages/Contacts";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import './styles/header.css';
+import './styles/hero.css';
+import './styles/projects.css';
+import './styles/footer.css';
+import './styles/media.css';
+import './styles/about.css';
+import './styles/contacts.css';
+
+
 function App() {
     useEffect(() => {
         AOS.init({

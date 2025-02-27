@@ -1,0 +1,109 @@
+/* Контейнер секции */
+.contacts-container {
+    padding: 100px 20px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(20, 10, 40, 0.2) 0%, rgba(13, 11, 26, 0.6) 100%);
+    backdrop-filter: blur(8px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Заголовок */
+.contacts-container h2 {
+    font-size: 2.8rem;
+    color: #bb86fc;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 15px rgba(187, 134, 252, 0.5);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Контейнер с контактами */
+.contacts-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-in-out forwards;
+}
+
+/* Текст контактов */
+.contacts-text {
+    font-size: 1.4rem;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+/* Ссылки */
+.contacts-text a {
+    display: inline-block;
+    color: #bb86fc;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: rgba(108, 39, 179, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Эффект наведения */
+.contacts-text a:hover {
+    background: rgba(108, 39, 179, 0.4);
+    color: #d7b8ff;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.5);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .contacts-container {
+        padding: 80px 20px;
+    }
+
+    .contacts-container h2 {
+        font-size: 2.4rem;
+    }
+
+    .contacts-content {
+        padding: 15px;
+    }
+
+    .contacts-text {
+        font-size: 1.2rem;
+    }
+
+    .contacts-text a {
+        padding: 8px 15px;
+        font-size: 1.1rem;
+    }
+}

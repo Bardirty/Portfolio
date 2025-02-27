@@ -1,0 +1,125 @@
+/* Базовые стили Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #290d43;
+    padding: 10px 5%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 90%;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+/* Логотип + имя */
+.main-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.main-button img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Навигация */
+.header-links {
+    display: flex;
+    gap: 20px;
+}
+
+.header-link {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.header-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Бургер-меню (только для мобилок) */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.burger-line {
+    width: 30px;
+    height: 4px;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Анимация бургер-меню */
+.burger-menu.open .burger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.burger-menu.open .burger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.open .burger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Контекстное меню (анимация выпадения) */
+.header-links {
+    display: flex;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Стили для мобильного контекстного меню */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex;
+    }
+
+    .header-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(41, 13, 67, 0.95);
+        width: 100%;
+        text-align: center;
+        padding: 0;
+        transform: translateY(-20px);
+        opacity: 0;
+        visibility: hidden;
+        border-radius: 0 0 10px 10px;
+        overflow: hidden;
+    }
+
+    .header-links.mobile-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Анимация появления каждого элемента */
+    .header-link {
+        padding: 15px;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .mobile-open .header-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

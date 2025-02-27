@@ -1,0 +1,154 @@
+/* Секция проектов */
+.projects-container {
+    padding: 100px 20px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(20, 10, 40, 0.2) 0%, rgba(13, 11, 26, 0.6) 100%);
+    backdrop-filter: blur(8px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Заголовок */
+.projects-container h2 {
+    font-size: 2.8rem;
+    color: #bb86fc;
+    margin-bottom: 40px;
+    text-shadow: 0 4px 15px rgba(187, 134, 252, 0.5);
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+/* Грид с проектами */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Карточка проекта */
+.project-card {
+    background: rgba(41, 13, 67, 0.4);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(187, 134, 252, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Эффект при наведении */
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(108, 39, 179, 0.3);
+    border-color: rgba(187, 134, 252, 0.3);
+    background: rgba(41, 13, 67, 0.6);
+}
+
+/* Картинка проекта */
+.project-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    transition: all 0.4s ease;
+    filter: brightness(0.85);
+}
+
+.project-card:hover .project-image {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+/* Контент проекта */
+.project-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+/* Название проекта */
+.project-content h3 {
+    font-size: 1.6rem;
+    color: white;
+    margin-bottom: 12px;
+    transition: color 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-card:hover .project-content h3 {
+    color: #bb86fc;
+}
+
+/* Описание проекта */
+.project-content p {
+    font-size: 1rem;
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.project-card:hover .project-content p {
+    color: #ddd;
+}
+
+/* Кнопка "More details" */
+.project-content a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: rgba(108, 39, 179, 0.2);
+    color: #bb86fc;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.project-content a:hover {
+    background-color: rgba(108, 39, 179, 0.4);
+    color: #d7b8ff;
+}
+/* Адаптивность */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .project-card {
+        min-height: auto;
+        height: auto;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-content {
+        padding: 15px;
+    }
+
+    .project-content h3 {
+        font-size: 1.4rem;
+    }
+
+    .project-content p {
+        font-size: 0.95rem;
+    }
+}

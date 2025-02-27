@@ -1,0 +1,24 @@
+@media (max-width: 768px) {
+    .hero {
+        text-align: center;
+        max-width: 800px;
+        margin-top: 50%;
+        padding: 20px;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+    }
+
+    .project-card {
+        min-height: auto;
+        height: auto;
+    }
+}
+
+@media (min-width: 1600px) {
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

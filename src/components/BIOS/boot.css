@@ -20,7 +20,19 @@
 
   overflow: hidden;
 }
+.boot-wrapper.interactive {
+  pointer-events: auto;
+  cursor: pointer;
+}
 
+/* optional: subtle blink */
+@keyframes blink {
+  50% { opacity: 0.35; }
+}
+
+.boot-wrapper.interactive .boot-text::after {
+  content: "";
+}
 .boot-text {
   white-space: pre;
   text-align: left;

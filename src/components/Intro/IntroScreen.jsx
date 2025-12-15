@@ -3,8 +3,6 @@ import { useUIStore } from "../../store/uiStore";
 import startupSound from "../../assets/sounds/startup.mp3";
 import "./intro.css";
 
-let audioUnlocked = false;
-
 export default function IntroScreen() {
   const setIntroShown = useUIStore((s) => s.setIntroShown);
   const wrapperRef = useRef(null);
@@ -12,34 +10,29 @@ export default function IntroScreen() {
   useEffect(() => {
     const wrapper = wrapperRef.current;
 
+    // показать интро
     setTimeout(() => {
       wrapper?.classList.add("visible");
     }, 50);
 
-    const unlockAudio = () => {
-      if (audioUnlocked) return;
-      audioUnlocked = true;
-
+    // 🔊 попытка автозапуска звука
+    try {
       const audio = new Audio(startupSound);
       audio.volume = 0.6;
-      audio.play().catch(() => {});
-      
-      window.removeEventListener("pointerdown", unlockAudio);
-    };
+      audio.play().catch(() => {
+        // ❗ браузер заблокировал — просто игнорируем
+      });
+    } catch {}
 
-    window.addEventListener("pointerdown", unlockAudio);
-
+    // выход
     setTimeout(() => {
       wrapper?.classList.add("exit");
     }, 2600);
 
+    // завершение интро
     setTimeout(() => {
       setIntroShown();
     }, 3600);
-
-    return () => {
-      window.removeEventListener("pointerdown", unlockAudio);
-    };
   }, [setIntroShown]);
 
   return (

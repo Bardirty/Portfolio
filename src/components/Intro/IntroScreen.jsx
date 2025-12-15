@@ -3,43 +3,43 @@ import { useUIStore } from "../../store/uiStore";
 import startupSound from "../../assets/sounds/startup.mp3";
 import "./intro.css";
 
+let audioUnlocked = false;
+
 export default function IntroScreen() {
   const setIntroShown = useUIStore((s) => s.setIntroShown);
   const wrapperRef = useRef(null);
-  const timeouts = useRef([]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
 
-    timeouts.current.push(
-      setTimeout(() => {
-        wrapper?.classList.add("visible");
-      }, 50)
-    );
+    setTimeout(() => {
+      wrapper?.classList.add("visible");
+    }, 50);
 
-    try {
+    const unlockAudio = () => {
+      if (audioUnlocked) return;
+      audioUnlocked = true;
+
       const audio = new Audio(startupSound);
-      audio.volume = 0;
+      audio.volume = 0.6;
       audio.play().catch(() => {});
-      let v = 0;
-      const fade = setInterval(() => {
-        v += 0.04;
-        audio.volume = Math.min(v, 0.6);
-        if (v >= 0.6) clearInterval(fade);
-      }, 70);
-    } catch {}
+      
+      window.removeEventListener("pointerdown", unlockAudio);
+    };
 
-    timeouts.current.push(
-      setTimeout(() => {
-        wrapper?.classList.add("exit");
-      }, 2600)
-    );
+    window.addEventListener("pointerdown", unlockAudio);
 
-    timeouts.current.push(
-      setTimeout(() => {
-        setIntroShown();
-      }, 3600)
-    );
+    setTimeout(() => {
+      wrapper?.classList.add("exit");
+    }, 2600);
+
+    setTimeout(() => {
+      setIntroShown();
+    }, 3600);
+
+    return () => {
+      window.removeEventListener("pointerdown", unlockAudio);
+    };
   }, [setIntroShown]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BaseWindow from "./BaseWindow";
 import { useUIStore } from "../../../store/uiStore";
 import { APP_DEFS } from "../../apps/appDefs";
@@ -6,8 +6,8 @@ import { APP_DEFS } from "../../apps/appDefs";
 function getIconCenter(appId) {
   const el = document.querySelector(`.dock-icon[data-app="${appId}"]`);
   if (!el) return null;
-  const r = el.getBoundingClientRect();
 
+  const r = el.getBoundingClientRect();
   return {
     x: r.left + r.width / 2 + window.scrollX,
     y: r.top + r.height / 2 + window.scrollY,
@@ -17,7 +17,6 @@ function getIconCenter(appId) {
 export default function WindowManager() {
   const activeApp = useUIStore((s) => s.activeApp);
   const setActiveApp = useUIStore((s) => s.setActiveApp);
-
   const [windows, setWindows] = useState([]);
 
   const bringToFront = (id) => {
@@ -35,7 +34,11 @@ export default function WindowManager() {
     const def = APP_DEFS[activeApp];
     if (!def) return;
 
-    const spawn = getIconCenter(def.id);
+    const spawn =
+      getIconCenter(def.id) ?? {
+        x: window.innerWidth / 2,
+        y: window.innerHeight - 80,
+      };
 
     setWindows((prev) => {
       const exists = prev.find((w) => w.id === def.id);
@@ -43,7 +46,11 @@ export default function WindowManager() {
       if (exists) {
         return prev.map((w) =>
           w.id === def.id
-            ? { ...w, minimized: false, z: Math.max(...prev.map((p) => p.z)) + 1 }
+            ? {
+                ...w,
+                minimized: false,
+                z: Math.max(...prev.map((p) => p.z)) + 1,
+              }
             : w
         );
       }
@@ -51,21 +58,23 @@ export default function WindowManager() {
       const defaultW = 680;
       const defaultH = 420;
 
-      const newWin = {
-        id: def.id,
-        title: def.title,
-        minimized: false,
-        maximized: false,
-        z: Math.max(...prev.map((p) => p.z), 0) + 1,
-        pos: {
-          left: window.innerWidth / 2 - defaultW / 2,
-          top: window.innerHeight * 0.18,
+      return [
+        ...prev,
+        {
+          instanceId: crypto.randomUUID(),
+          id: def.id,
+          title: def.title,
+          minimized: false,
+          maximized: false,
+          z: Math.max(...prev.map((p) => p.z), 0) + 1,
+          pos: {
+            left: window.innerWidth / 2 - defaultW / 2,
+            top: window.innerHeight * 0.18,
+          },
+          size: { w: defaultW, h: defaultH },
+          spawnPoint: spawn,
         },
-        size: { w: defaultW, h: defaultH },
-        spawnPoint: spawn,
-      };
-
-      return [...prev, newWin];
+      ];
     });
 
     setActiveApp(null);
@@ -73,13 +82,6 @@ export default function WindowManager() {
 
   const closeWindow = (id) =>
     setWindows((prev) => prev.filter((w) => w.id !== id));
-
-  const minimizeWindow = (id) =>
-    setWindows((prev) =>
-      prev.map((w) =>
-        w.id === id ? { ...w, minimized: !w.minimized } : w
-      )
-    );
 
   const maximizeWindow = (id) =>
     setWindows((prev) =>
@@ -90,21 +92,19 @@ export default function WindowManager() {
 
   const updateWindowState = (id, pos, size) =>
     setWindows((prev) =>
-      prev.map((w) =>
-        w.id === id ? { ...w, pos, size } : w
-      )
+      prev.map((w) => (w.id === id ? { ...w, pos, size } : w))
     );
 
   return (
     <>
-      {windows
+      {[...windows]
         .sort((a, b) => a.z - b.z)
         .map((w) => {
           const Content = APP_DEFS[w.id].content;
 
           return (
             <BaseWindow
-              key={w.id}
+              key={w.instanceId}
               id={w.id}
               title={w.title}
               zIndex={w.z}
@@ -114,7 +114,6 @@ export default function WindowManager() {
               pos={w.pos}
               size={w.size}
               onClose={closeWindow}
-              onMinimize={minimizeWindow}
               onMaximize={maximizeWindow}
               onFocus={bringToFront}
               onRequestSaveState={updateWindowState}

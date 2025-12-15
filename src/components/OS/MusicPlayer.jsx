@@ -29,8 +29,7 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/audio/ambient.mp3" />
-
+      <audio src={`${import.meta.env.BASE_URL}audio/ambient.mp3`} />
       <button className="music-toggle" onClick={toggleMute}>
         {muted ? "🔇" : "🔊"}
       </button>

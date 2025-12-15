@@ -103,56 +103,56 @@ export default function AdditiveFloppyViewer({ project, onClose }) {
     const loader = new GLTFLoader();
     let floppy = null;
 
-    loader.load("/models/floppy.glb", (gltf) => {
-  floppy = gltf.scene;
-  scene.add(floppy);
+    loader.load(`${import.meta.env.BASE_URL}models/floppy.glb`, (gltf) => {
+      floppy = gltf.scene;
+      scene.add(floppy);
 
-  let labelMesh = null;
+      let labelMesh = null;
 
-  floppy.traverse((child) => {
-    if (child.isMesh) {
-      if (child.name.toLowerCase() === "label") {
-        labelMesh = child;
+      floppy.traverse((child) => {
+        if (child.isMesh) {
+          if (child.name.toLowerCase() === "label") {
+            labelMesh = child;
+          }
+
+          if (child.material) {
+            child.material.metalness = 0.22;
+            child.material.roughness = 0.28;
+            child.material.envMapIntensity = 1.3;
+          }
+        }
+      });
+
+      if (!labelMesh) {
+        console.warn("⚠ Label mesh NOT FOUND. Check Blender mesh name!");
+        return;
       }
 
-      if (child.material) {
-        child.material.metalness = 0.22;
-        child.material.roughness = 0.28;
-        child.material.envMapIntensity = 1.3;
-      }
-    }
-  });
+      console.log("✓ Label found:", labelMesh);
+      const texture = createLabelTexture(project.title);
 
-  if (!labelMesh) {
-    console.warn("⚠ Label mesh NOT FOUND. Check Blender mesh name!");
-    return;
-  }
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+      });
 
-  console.log("✓ Label found:", labelMesh);
-  const texture = createLabelTexture(project.title);
+      const planeGeo = new THREE.PlaneGeometry(1, 1);
+      const plane = new THREE.Mesh(planeGeo, material);
 
-  const material = new THREE.MeshBasicMaterial({
-    map: texture,
-    side: THREE.DoubleSide,
-  });
+      plane.position.copy(labelMesh.position);
+      plane.rotation.copy(labelMesh.rotation);
+      plane.scale.copy(labelMesh.scale);
+      plane.scale.multiplyScalar(8);
 
-  const planeGeo = new THREE.PlaneGeometry(1, 1);
-  const plane = new THREE.Mesh(planeGeo, material);
+      plane.position.z += 0.001;
+      plane.position.y += 4;
 
-  plane.position.copy(labelMesh.position);
-  plane.rotation.copy(labelMesh.rotation);
-  plane.scale.copy(labelMesh.scale);
-  plane.scale.multiplyScalar(8);
+      labelMesh.visible = false;
 
-  plane.position.z += 0.001;
-  plane.position.y += 4;
+      labelMesh.parent.add(plane);
 
-  labelMesh.visible = false;
-
-  labelMesh.parent.add(plane);
-
-  console.log("✓ Correct local transform applied");
-});
+      console.log("✓ Correct local transform applied");
+    });
     let raf;
     let baseSpeed = 0.018;
 

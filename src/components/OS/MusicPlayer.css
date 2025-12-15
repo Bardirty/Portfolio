@@ -1,0 +1,52 @@
+.music-toggle {
+  position: fixed;
+  right: 22px;
+  top: 22px;
+
+  width: 46px;
+  height: 46px;
+
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+  transition: 0.25s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .music-toggle:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .music-toggle {
+    right: 14px;
+    bottom: 14px;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 18px;
+    backdrop-filter: blur(8px);
+  }
+}
+
+@media (max-width: 420px) {
+  .music-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,54 @@
+.boot-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: #000;
+  color: #ffffff;
+  font-family: monospace;
+
+  font-size: 1rem;
+  line-height: 1.15rem;
+
+  padding: 24px 38px;
+
+  z-index: 9999;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.boot-text {
+  white-space: pre;
+  text-align: left;
+
+  max-width: 1000px;
+  opacity: 1;
+}
+
+.boot-wrapper.hide {
+  opacity: 0;
+}
+@media (max-width: 720px) {
+
+  .boot-wrapper {
+    padding:
+      calc(env(safe-area-inset-top) + 16px)
+      14px
+      calc(env(safe-area-inset-bottom) + 16px);
+
+    font-size: 0.7rem;
+    line-height: 0.9rem;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .boot-text {
+    max-width: 100%;
+    white-space: pre;
+  }
+}

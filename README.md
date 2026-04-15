@@ -1,3 +1,8 @@
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite)
+![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+
 # Interactive Portfolio Template
 
 A modern, interactive developer portfolio built with **React + Vite**, featuring modular architecture, animated UI, and optional 3D support.
@@ -19,7 +24,9 @@ Designed for developers who want more than a static portfolio.
 
 ## Preview
 
-![Preview](README-assets/preview.gif)
+<p align="center">
+  <img src="README-assets/preview.gif" width="800"/>
+</p>
 
 ---
 
@@ -150,6 +157,16 @@ Feel free to fork and improve the project.
 ## 📄 License
 
 MIT License
+
+---
+
+## 🌐 Live Demo
+
+<p>
+  <a href="https://bardirty.github.io/Portfolio/">
+    <img src="https://img.shields.io/badge/🚀_Open_Portfolio-000?style=for-the-badge">
+  </a>
+</p>
 
 ---
 

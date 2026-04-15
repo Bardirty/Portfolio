@@ -156,11 +156,3 @@ MIT License
 ## 👤 Author
 
 Created by **Danil Bardakov**
-
----
-
-## 💀 Final Words
-
-Make it yours.
-Break it.
-Rebuild it better.

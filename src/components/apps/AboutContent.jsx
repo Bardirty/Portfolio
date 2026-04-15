@@ -11,7 +11,6 @@ export default function AboutContent() {
   const [pause3D, setPause3D] = useState(true);
 
   useEffect(() => {
-    // Запускаем 3D с небольшой задержкой для плавности
     const timer = setTimeout(() => setPause3D(false), 400);
     return () => clearTimeout(timer);
   }, []);
@@ -19,33 +18,21 @@ export default function AboutContent() {
   const timeline = [
     {
       year: "2023 — now",
-      title: "Game Developer",
-      desc: "Developing atmospheric games and interactive experiences. Working on gameplay systems, shaders, tools, and overall game feel.",
+      title: "Title 1",
+      desc: "Description",
     },
     {
       year: "2022 — now",
-      title: "C/C++ Developer",
-      desc: "Embedded systems, hardware prototyping, low-level C++ logic, and system-oriented programming.",
-    },
-    {
-      year: "2021 — now",
-      title: "Web & 3D Developer",
-      desc: "Building interactive 3D web applications using React and Three.js with a focus on UI/UX and real-time graphics.",
+      title: "Title 2",
+      desc: "Description",
     },
   ];
 
 
   const skills = [
-  { name: "Unity", level: "core" },
-  { name: "C#", level: "core" },
-  { name: "C/C++ (Embedded)", level: "core" },
+  { name: "Core Skill", level: "core" },
   
-  { name: "Game Design", level: "secondary" },
-  { name: "Java", level: "secondary" },
-  { name: "React", level: "secondary" },
-  { name: "Three.js", level: "secondary" },
-  { name: "Arduino", level: "secondary" },
-  { name: "Tools Development", level: "secondary" },
+  { name: "Secondary Skill", level: "secondary" },
 ];
 
   return (
@@ -56,18 +43,15 @@ export default function AboutContent() {
         <img src={avatar} alt="avatar" className="about-avatar" />
 
         <div>
-          <h1 className="about-title">Danil Bardakov</h1>
+          <h1 className="about-title">FirstName LastName</h1>
           <div className="about-subtitle">
-            Game Developer • Software Developer
+            Subtitle Skill • Subtitle Skill 
           </div>
         </div>
       </div>
 
       <p className="about-desc">
-        I’m a game developer with a strong technical background, focused on building
-        atmospheric and responsive interactive experiences. My work combines gameplay
-        systems, real-time 3D rendering, shaders, and low-level programming with modern
-        UI/UX engineering.
+        About me text. Write info above
       </p>
 
       <div className="about-section-title">Core Skills</div>
@@ -98,7 +82,7 @@ export default function AboutContent() {
       <div className="about-section-title">Links</div>
       <div className="about-links">
         <a
-          href="https://github.com/Bardirty"
+          href="https://github.com"
           target="_blank"
           rel="noreferrer"
           className="about-icon-link"
@@ -106,7 +90,7 @@ export default function AboutContent() {
           <img src={iconGithub} alt="GitHub" />
         </a>
         <a
-          href="https://www.linkedin.com/in/danilbardakov/"
+          href="https://www.linkedin.com/"
           target="_blank"
           rel="noreferrer"
           className="about-icon-link"
@@ -114,7 +98,7 @@ export default function AboutContent() {
           <img src={iconLinkedIn} alt="LinkedIn" />
         </a>
         <a
-          href="https://bardirty.itch.io"
+          href="https://itch.io"
           target="_blank"
           rel="noreferrer"
           className="about-icon-link"

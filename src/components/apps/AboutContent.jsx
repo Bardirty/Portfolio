@@ -24,7 +24,7 @@ export default function AboutContent() {
     },
     {
       year: "2022 — now",
-      title: "Software Developer",
+      title: "C/C++ Developer",
       desc: "Embedded systems, hardware prototyping, low-level C++ logic, and system-oriented programming.",
     },
     {
@@ -38,10 +38,10 @@ export default function AboutContent() {
   const skills = [
   { name: "Unity", level: "core" },
   { name: "C#", level: "core" },
-  { name: "C++ (Embedded)", level: "core" },
-  { name: "C++ / OpenGL", level: "core" },
+  { name: "C/C++ (Embedded)", level: "core" },
   
   { name: "Game Design", level: "secondary" },
+  { name: "Java", level: "secondary" },
   { name: "React", level: "secondary" },
   { name: "Three.js", level: "secondary" },
   { name: "Arduino", level: "secondary" },

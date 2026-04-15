@@ -1,5 +1,6 @@
 // src/data/gamesData.js
 import lostecho from "../assets/covers/lost-echo.png";
+import rzapka from "../assets/covers/rzapka.png"
 import pigeon from "../assets/covers/pigeon.png";
 import pawtions from "../assets/covers/pawtion.png";
 import inDev from "../assets/covers/indev-img.png";
@@ -13,6 +14,14 @@ export const gamesData = [
     description: "Atmospheric horror exploration prototype created as a team project. Focused on mood, environmental storytelling, and pacing.",
     cover: lostecho,
     link: "https://bardirty.itch.io/lost-echo",
+    isReleased: true,
+  },
+  {
+    id: "rzapka-unlimited",
+    title: "Rzapka Unlimited",
+    description: "There’s only one goal—to get to Rzapka. But is it achievable? That’s another story ;))) \nThe AMAZING game made for the jUŚt Transition 2026 GameJam..",
+    cover: rzapka,
+    link: "https://bardirty.itch.io/rzapka-unlimited",
     isReleased: true,
   },
   {
